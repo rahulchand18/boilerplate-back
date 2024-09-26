@@ -47,8 +47,3 @@ connect()
         console.error('Database connection failed:', error);
         process.exit(1);
     });
-
-app.use((err, req, res) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});

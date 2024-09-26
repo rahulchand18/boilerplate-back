@@ -190,10 +190,37 @@ const login = async (req, res) => {
     }
 };
 
+const logout = async (req, res) => {
+    try {
+        const refreshToken = req.cookies[REFRESH_TOKEN];
+        if (!refreshToken) {
+            return res
+                .status(401)
+                .send({ success: false, message: 'No refresh token found' });
+        }
+        await AuthService.revokeRefreshToken(req, res);
+        AuthService.destroyCookie(REFRESH_TOKEN, res);
+        res.status(200).json({
+            message: 'Employee Logout Successful',
+            data: {
+                userName: refreshToken
+                    ? await AuthService.getUserNameFromRefreshToken(
+                          refreshToken
+                      )
+                    : null
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send({ success: false, message: error.stack });
+    }
+};
+
 const userController = {
     createNewUser,
     importEmployee,
-    login
+    login,
+    logout
 };
 
 export default userController;

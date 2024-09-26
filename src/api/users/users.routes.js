@@ -10,6 +10,7 @@ router.post('/importUsers', userController.importEmployee);
 router.post('/refresh-access-token', authController.refreshAccessToken);
 
 router.post('/login', userController.login);
+router.post('/logout', userController.logout);
 
 const userRoutes = router;
 

@@ -17,8 +17,8 @@ const insertManyUsers = async (bulkEmployeeData) => {
     return newEmployeeList;
 };
 
-const findUserById = async (employeeId) => {
-    return await UserModel.findOne({ employeeId, status: 'ACT' });
+const findUserById = async (id) => {
+    return await UserModel.findById(id);
 };
 
 const findActiveUserByEmail = async (email) => {

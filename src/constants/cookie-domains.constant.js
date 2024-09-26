@@ -1,1 +1,1 @@
-export const DOMAINS = ['*.javra.com'];
+export const DOMAINS = ['https://hrm.javra.com', 'localhost'];

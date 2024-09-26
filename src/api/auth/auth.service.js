@@ -77,6 +77,7 @@ const setCookie = (cookieName, token, res) => {
     const domains = DOMAINS;
     const cookieOptions = {
         httpOnly: true,
+        sameSite: 'None',
         expires: new Date(Number(Date.now()) + REFRESH_TOKEN_EXPIRATION_MS),
         secure: true
     };
