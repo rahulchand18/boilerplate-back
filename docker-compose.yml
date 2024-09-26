@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+    accounts-api:
+        container_name: accounts-api
+        build: .
+        environment:
+            - MONGO_HOST=accounts-db
+            - COMPOSE_PROJECT_NAME=accounts
+        ports:
+            - 3030:3030
+        volumes:
+            - ../psvolumes/accounts/uploads:/workspace/uploads
+        depends_on:
+            - accounts-db
+        networks:
+            - accounts_network
+        restart: unless-stopped
+        links:
+            - accounts-db
+        command: npm start
+
+    accounts-db:
+        container_name: accounts-db
+        image: mongo:8
+        volumes:
+            - ../psvolumes/accounts-db:/data/db
+        environment:
+            - COMPOSE_PROJECT_NAME=accounts
+            - MONGO_INITDB_ROOT_USERNAME=
+            - MONGO_INITDB_ROOT_PASSWORD=
+        ports:
+            - 21017:27017
+        networks:
+            - accounts_network
+        restart: unless-stopped
+networks:
+    accounts_network:
+        driver: bridge

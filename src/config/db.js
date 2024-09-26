@@ -2,7 +2,7 @@ import { connect as _connect } from 'mongoose';
 
 const connect = async () => {
     try {
-        const result = await _connect(process.env.MONGODB_URI, {
+        const result = await _connect(process.env.DOCKER_MONGODB_URI, {
             auth: {
                 username: process.env.MONGO_USERNAME,
                 password: process.env.MONGO_PASSWORD
